@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powered by Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+</head>
+<body>
+    <h2 style="text-align: center;">Book Update</h2>
+    <form action="{{ url_for ('updatefix')}}" method="post">
+        <input type="number" name="id_buku" id="" value="{{ data_buku.id }}" hidden>
+        <label for="">Book Name</label>
+        <input type="text" name="nama_buku" id="" value="{{ data_buku.title }}">
+        <label for="">Book Description</label>
+        <input type="text" name="deskripsi_buku" id="" value="{{ data_buku.description }}"">
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

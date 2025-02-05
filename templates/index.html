@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powered by Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+</head>
+
+<body>
+    <h2 style="text-align: center;">Book List</h2>
+    {% if data_buku |length < 1 %}
+    <h4>Tidak ada data. Mohon masukkan data baru</h4>
+    {% else %}
+    <table border="1">
+        <tr class="index_row">
+            <th>ID</th>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Created At</td>
+            <td>Updated At</td>
+            <td>Action</td>
+        </tr>
+        {% for buku in data_buku %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ buku.title }}</td>
+            <td>{{ buku.description }}</td>
+            <td>{{ buku.date_created.replace(microsecond=0) }}</td>
+            <td>{{ buku.date_updated.replace(microsecond=0) }}</td>
+            <td>
+                <div class="tombol update">
+                    <a href="/update/{{ buku.id }}">Update</a>
+                </div>
+                <div class="tombol delete">
+                    <a href="/delete/{{ buku.id }}">Delete</a>
+                </div>
+            </td>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif%}
+    <form action="{{ url_for ('index')}}" method="post">
+        <label for="">Book Name</label>
+        <input type="text" name="nama_buku" id="">
+        <label for="">Book Description</label>
+        <input type="text" name="deskripsi_buku" id="">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
